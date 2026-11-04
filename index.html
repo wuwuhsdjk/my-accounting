@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#f7f8f7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="我的记账">
+  <meta name="description" content="私人极简记账本，离线记录收入、支出和月度统计。">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>我的记账</title>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar"><div><div class="eyebrow">PERSONAL LEDGER</div><h1>我的记账</h1></div><button id="openSettings" class="iconbtn" aria-label="备份与设置" title="备份与设置">⚙</button></header>
+    <main>
+      <section id="home" class="page active" aria-label="首页">
+        <div class="monthbar"><button class="month-arrow" id="prevMonth" aria-label="上个月">‹</button><button class="month-label" id="monthLabel" aria-label="选择月份"></button><button class="month-arrow" id="nextMonth" aria-label="下个月">›</button></div>
+        <section class="summary card"><div class="summary-title">本月结余</div><div id="balance" class="balance">¥0.00</div><div class="summary-two"><div><span>收入</span><strong id="incomeTotal" class="income">¥0.00</strong></div><div><span>支出</span><strong id="expenseTotal">¥0.00</strong></div></div></section>
+        <section class="panel"><div class="section-heading"><h2>支出分类</h2><span id="chartSubtitle" class="muted"></span></div><div class="chart-wrap"><div id="donut" class="donut"><div class="donut-hole"><small>本月支出</small><b id="donutTotal">¥0</b></div></div><div id="legend" class="legend"></div></div></section>
+        <section class="panel"><div class="section-heading"><h2>最近账单</h2><button id="seeAll" class="textbtn">查看全部 →</button></div><div id="recentList" class="transactions"></div></section>
+      </section>
+      <section id="records" class="page" aria-label="全部账单"><div class="section-heading"><h2>账单记录</h2><span class="muted" id="recordCount"></span></div><div class="filters"><select id="filterMonth" aria-label="月份"></select><select id="filterType" aria-label="收支类型"><option value="all">全部类型</option><option value="expense">只看支出</option><option value="income">只看收入</option></select></div><div id="allList" class="transactions"></div></section>
+      <section id="settings" class="page" aria-label="备份与设置"><div class="section-heading"><h2>备份与设置</h2></div><div class="card settings-card"><h3>我的数据</h3><p>记账数据保存在当前设备的浏览器本地，不会上传到服务器。换手机或清除网站数据可能导致账本丢失，请定期导出备份。</p><div class="settings-actions"><button id="exportJson" class="primary-btn">导出完整备份（JSON）</button><button id="exportCsv" class="secondary-btn">导出表格（CSV）</button><label class="secondary-btn file-label" for="importFile">从 JSON 备份恢复</label><input id="importFile" type="file" accept=".json,application/json" hidden></div></div><div class="card settings-card"><h3>安装提示</h3><p>在 iPhone Safari 打开已发布的 HTTPS 网址，点击分享按钮，选择“添加到主屏幕”。打开桌面图标即可像 App 一样使用。</p></div><div class="card settings-card"><h3>隐私与安全</h3><p>本应用不需要登录、不使用第三方分析脚本。删除浏览器数据或卸载 Web App 可能删除本地账本。备份文件请自行妥善保管。</p></div><div class="smallprint" id="storageStatus"></div></section>
+    </main>
+    <nav class="bottom-nav" aria-label="主导航"><button data-page="home" class="nav-item active"><span>⌂</span><small>首页</small></button><button id="newEntry" class="new-entry" aria-label="记一笔">＋</button><button data-page="records" class="nav-item"><span>▤</span><small>账单</small></button></nav>
+  </div>
+  <dialog id="entryDialog" class="entry-dialog"><form id="entryForm" class="entry-form" novalidate><div class="dialog-head"><button type="button" id="closeDialog" class="textbtn">取消</button><h2 id="dialogTitle">记一笔</h2><button type="submit" class="textbtn save-btn">保存</button></div><div class="type-toggle" role="group" aria-label="收入或支出"><button type="button" class="selected" data-entry-type="expense">支出</button><button type="button" data-entry-type="income">收入</button></div><div class="amount-row"><span>¥</span><input id="amountInput" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off" required aria-label="金额"></div><div class="field"><label for="categoryInput">分类</label><div id="categories" class="category-grid"></div><input id="categoryInput" type="hidden"></div><div class="field"><label for="dateInput">日期</label><input id="dateInput" type="date" required></div><div class="field"><label for="noteInput">备注（选填）</label><input id="noteInput" type="text" placeholder="例如：午餐" maxlength="80"></div><button id="deleteEntry" type="button" class="danger-btn hidden">删除这笔记录</button></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
