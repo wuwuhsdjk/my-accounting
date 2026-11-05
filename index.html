@@ -19,6 +19,14 @@
     <header class="topbar"><div><div class="eyebrow">PERSONAL LEDGER</div><h1>我的记账</h1></div><button id="openSettings" class="iconbtn" aria-label="备份与设置" title="备份与设置">⚙</button></header>
     <main>
       <section id="home" class="page active" aria-label="首页">
+        <section class="today-panel card" aria-label="今日收支统计">
+          <div class="today-heading"><h2>今日收支</h2><span id="todayDate" class="muted"></span></div>
+          <div class="today-grid">
+            <div class="today-stat"><span>今日收入</span><strong id="todayIncome" class="income">¥0.00</strong></div>
+            <div class="today-stat"><span>今日支出</span><strong id="todayExpense">¥0.00</strong></div>
+            <div class="today-stat"><span>今日结余</span><strong id="todayBalance">¥0.00</strong></div>
+          </div>
+        </section>
         <div class="monthbar"><button class="month-arrow" id="prevMonth" aria-label="上个月">‹</button><button class="month-label" id="monthLabel" aria-label="选择月份"></button><button class="month-arrow" id="nextMonth" aria-label="下个月">›</button></div>
         <section class="summary card"><div class="summary-title">本月结余</div><div id="balance" class="balance">¥0.00</div><div class="summary-two"><div><span>收入</span><strong id="incomeTotal" class="income">¥0.00</strong></div><div><span>支出</span><strong id="expenseTotal">¥0.00</strong></div></div></section>
         <section class="panel"><div class="section-heading"><h2>支出分类</h2><span id="chartSubtitle" class="muted"></span></div><div class="chart-wrap"><div id="donut" class="donut"><div class="donut-hole"><small>本月支出</small><b id="donutTotal">¥0</b></div></div><div id="legend" class="legend"></div></div></section>
